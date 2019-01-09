@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Add Cookie</h1>
+<form method="post">
+    {% csrf_token %}
+    Cookie Name<br/>
+    <input type="text" name="cookie_name"/>
+    <p/>
+    Cookie Value<br/>
+    <input type="text" name="cookie_value"/>
+    <p/>
+    <input type="checkbox" name="durable"/>Durable
+    <p/>
+    <input type="submit" value="Add Cookie"/>
+    <p/>
+</form>
+<p></p>
+<a href="/demo/list_cookies/">List Cookies </a>
+
+</body>
+</html>
