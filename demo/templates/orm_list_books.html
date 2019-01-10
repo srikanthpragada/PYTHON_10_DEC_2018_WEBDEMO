@@ -1,0 +1,27 @@
+{% extends 'orm_books_master.html' %}
+{% block content %}
+<h1>List of Books</h1>
+
+<table border="1" width="100%">
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+
+    {% for b in books %}
+    <tr>
+        <td> {{b.id}}</td>
+        <td> {{b.title}}</td>
+        <td> {{b.author}}</td>
+        <td style="text-align:right"> {{b.price}}</td>
+        <td style="text-align:center">
+            <a onclick="return confirm('Do you want to delete book?')" href="/demo/orm/deletebook/?id={{b.id}}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}

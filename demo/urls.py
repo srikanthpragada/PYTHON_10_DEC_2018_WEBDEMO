@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, book_views
+from . import views, book_views, orm_book_views
 
 urlpatterns = [
     path("welcome/", views.welcome),
@@ -11,4 +11,10 @@ urlpatterns = [
     path('add_cookie/', views.add_cookie ),
     path('list_cookies/', views.list_cookies),
     path('session_names/', views.session_names),
+    # ORM related urls
+    path("orm/listbooks/", orm_book_views.list_books),
+    path("orm/addbook/", orm_book_views.add_book),
+    path("orm/deletebook/", orm_book_views.delete_book),
+    path("orm/searchbooks/", orm_book_views.search_books),
+    path("orm/getbooks/", orm_book_views.get_books),
 ]
