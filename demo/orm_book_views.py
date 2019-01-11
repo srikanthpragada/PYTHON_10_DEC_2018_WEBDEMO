@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import AddBookForm, OrmAddBookForm
 import sqlite3
-from . models import Book
-from django.http import JsonResponse
+from .models import Book
+from django.http import JsonResponse, HttpResponse
+from django.db.models import Avg
 
 
 def list_books(request):
@@ -13,7 +14,7 @@ def list_books(request):
 def add_book(request):
     if request.method == "GET":
         f = OrmAddBookForm()
-        return render(request, 'orm_add_book.html',{'form' : f})
+        return render(request, 'orm_add_book.html', {'form': f})
     else:
         f = OrmAddBookForm(request.POST)
         if f.is_valid():
@@ -29,12 +30,24 @@ def delete_book(request):
     book.delete()
     return redirect("/demo/orm/listbooks")
 
+
 def search_books(request):
     return render(request, 'orm_search_books.html')
 
 
 def get_books(request):
     title = request.GET['title']
-    books = Book.objects.all().values()
-    bookslist = list(books)   # Convert QuerySet to list
+    # Get selected Book objects converted to dict using values()
+    books = Book.objects.filter(title__contains=title).values()
+    bookslist = list(books)  # Convert QuerySet to list
     return JsonResponse(bookslist, safe=False)
+
+
+def home_books(request):
+    return render(request, 'orm_home_books.html')
+
+
+def books_summary(request):
+    summary = Book.objects.all().aggregate(avg_price=Avg('price'))
+    avg = summary['avg_price']
+    return HttpResponse(f"Average Price : {avg}")

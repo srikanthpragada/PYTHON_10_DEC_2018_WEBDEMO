@@ -1,8 +1,39 @@
 {% extends 'orm_books_master.html' %}
 {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+ function getBooks() {
+      $.get("/demo/orm/getbooks",
+            {'title' : $("#title").val()},
+            showBooks);
+ }
+
+ // Callback method
+ function showBooks(books) {
+      list = ""
+      $("#books").html("")
+      $("#message").text("")
+
+      if (books.length == 0)
+         $("#message").text("Sorry! No book found!");
+      else
+      {
+         for(i = 0; i < books.length ; i ++)
+            list += "<li>" + books[i].title + "</li>";
+
+         $("#books").html(list);
+      }
+ }
+
+
+</script>
 <h1>Search Books</h1>
 Title : <input type="text" id="title"/>
-<button>Search</button>
+<button onclick="getBooks()">Search</button>
+<h4 id="message"></h4>
+<ul id="books">
+
+</ul>
 
 
 {% endblock %}

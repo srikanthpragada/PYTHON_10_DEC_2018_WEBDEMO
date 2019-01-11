@@ -1,0 +1,21 @@
+{% extends 'orm_books_master.html' %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+ function getSummary() {
+      $.get("/demo/orm/summary",{}, showSummary);
+ }
+
+ // Callback method
+ function showSummary(resp) {
+      $("#details").text(resp);
+ }
+
+</script>
+
+<p></p>
+<button onclick="getSummary()">Get Summary</button>
+<h3 id="details"></h3>
+
+
+{% endblock %}

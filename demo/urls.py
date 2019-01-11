@@ -17,4 +17,6 @@ urlpatterns = [
     path("orm/deletebook/", orm_book_views.delete_book),
     path("orm/searchbooks/", orm_book_views.search_books),
     path("orm/getbooks/", orm_book_views.get_books),
+    path("orm/home/", orm_book_views.home_books),
+    path("orm/summary/", orm_book_views.books_summary),
 ]
