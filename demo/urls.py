@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, book_views, orm_book_views
+from . import views, book_views, orm_book_views, rest_views
 
 urlpatterns = [
     path("welcome/", views.welcome),
@@ -19,4 +19,8 @@ urlpatterns = [
     path("orm/getbooks/", orm_book_views.get_books),
     path("orm/home/", orm_book_views.home_books),
     path("orm/summary/", orm_book_views.books_summary),
+    # REST urls
+    path("books/", rest_views.book_process),
+    path("books/<int:id>/", rest_views.one_book_process),
+    path("restclient/", rest_views.rest_client),
 ]
